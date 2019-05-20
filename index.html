@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <h1>Todos</h1>
+
+  <script src="main.js"></script>
+
+  <script>
+    const app = Application(); 
+
+    async function todos() {
+      var http = Request;
+      var request = "https://jsonplaceholder.typicode.com/todos";
+
+      try {
+        var data = await http.get(request);
+
+        return data.json();
+      } catch (error) {
+        return error;
+      }
+    }
+    
+    todos().then(function(todo) {
+      var res = [];
+
+      const Builder = Html.table({
+        thead: {
+          attribute: {
+            id: "sample-id"
+          },
+
+          data: ["#", "User ID", "Title", "Completed"]
+        },
+        tbody: {
+          attribute: {
+            id: "sample-tbody-id"
+          },
+
+          data: todo.map( data => {
+            const todos = [];
+
+            todos.push(data.id, data.userId, data.title, data.completed);
+
+            return todos;
+          })
+        }
+      });
+
+      app.innerHTML = Builder;
+    });
+
+    document.body.appendChild(app);
+  </script>
+</body>
+
+</html>
