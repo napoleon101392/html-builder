@@ -5,6 +5,7 @@ import { todos } from "./Request";
 const app = parent();
 
 todos().then(function(todo) {
+  const todos = [];
   const Builder = Html.table({
     thead: {
       attribute: {
@@ -19,8 +20,6 @@ todos().then(function(todo) {
       },
 
       data: todo.map( data => {
-        const todos = [];
-
         todos.push(data.id, data.userId, data.title, data.completed);
 
         return todos;
